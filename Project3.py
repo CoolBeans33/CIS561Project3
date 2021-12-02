@@ -6,8 +6,9 @@ concepts = pd.read_csv("concepts.csv", header=None)
 
 concepts[0] = concepts[0].str.lower()
 num_concepts = concepts.nunique()[0]
-print(concepts.value_counts())
-print(num_concepts)
+print("Counts of each concept:\n", concepts.value_counts())
+print("Unique Concepts:\n", np.unique(concepts))
+print("Number of Concepts:\n", num_concepts)
 
 frequency_matrix = np.zeros((num_concepts, num_concepts))
 print(frequency_matrix)
