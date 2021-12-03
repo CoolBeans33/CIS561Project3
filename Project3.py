@@ -16,6 +16,8 @@ for i in range(len(data)):
     data[i] = ' '.join(data[i]).split()
 print(data)
 
+'''
+# Solution 1
 words = set()
 for sublst in data:
     words |= set(sublst)
@@ -34,3 +36,23 @@ for sublst in data:
             result[index2][index1] += 1
 
 print(result)
+'''
+#Solution 2
+#Names of all dicts
+all_words = sorted(set([w for sublist in data for w in sublist]))
+
+#Creating the dicts
+dicts = []
+for i in all_words:
+    dicts.append([i, dict.fromkeys([w for w in all_words if w != i],0)])
+
+#Updating the dicts
+for l in data:
+    for word in sorted(set(l)):
+        tmpL = [w for w in l if w != word]
+        ind = ([w[0] for w in dicts].index(word))
+
+        for w in dicts[ind][1]:
+            dicts[ind][1][w] += l.count(w)
+
+print("Apple\n", dicts[0])
